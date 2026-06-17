@@ -135,6 +135,26 @@
       margin: 16px auto;
     }
 
+    #stage1 span,
+    #stage2 span,
+    #stage3 span,
+    #stage4 span,
+    #stage5 span {
+      font-weight: 700;
+      color: #b3521a;
+      border-bottom: 2px dotted transparent;
+      transition: border-color 0.2s, color 0.2s;
+      cursor: help;
+    }
+
+    #stage1 span:hover,
+    #stage2 span:hover,
+    #stage3 span:hover,
+    #stage4 span:hover,
+    #stage5 span:hover {
+      border-bottom-color: #b3521a;
+    }
+
     /* ---------- главный экран ---------- */
     #hero {
       position: relative;
@@ -406,7 +426,7 @@
       transform: scale(1.35);
     }
 
-    /* ---------- секреты (наведи) ---------- */
+    /* ---------- секреты ---------- */
     #secret1,
     #secret2,
     #secret3,
@@ -479,27 +499,6 @@
       color: #944e1f;
     }
 
-    /* ---------- подсказки в тексте ---------- */
-    #stage1 span,
-    #stage2 span,
-    #stage3 span,
-    #stage4 span,
-    #stage5 span {
-      font-weight: 700;
-      color: #b3521a;
-      border-bottom: 2px dotted transparent;
-      transition: border-color 0.2s, color 0.2s;
-      cursor: help;
-    }
-
-    #stage1 span:hover,
-    #stage2 span:hover,
-    #stage3 span:hover,
-    #stage4 span:hover,
-    #stage5 span:hover {
-      border-bottom-color: #b3521a;
-    }
-
     /* ---------- тесто (этап 2) ---------- */
     #stage2-wrapper {
       position: relative;
@@ -544,6 +543,122 @@
       background-color: #b95f2c;
       box-shadow: 0 0 24px rgba(235, 150, 30, 0.8);
     }
+
+    /* ---------- счётчик этапов (хлебная полоска) ---------- */
+    #stage-counter {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      background: #d49b4e;
+      padding: 14px 0;
+      border-radius: 18px 0 0 18px;
+      width: 28px;
+      overflow: hidden;
+      transition: width 0.35s ease, padding 0.35s ease, border-radius 0.35s ease;
+      box-shadow:
+        inset 0 3px 0 rgba(255,255,255,0.2),
+        inset 0 -3px 0 rgba(0,0,0,0.1),
+        2px 2px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    #stage-counter::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(to bottom, #c0782e, #b0681e);
+      border-radius: 14px 0 0 0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    #stage-counter::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(to top, #b0681e, #c0782e);
+      border-radius: 0 0 0 14px;
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.2);
+    }
+
+    #stage-counter:hover {
+      width: 145px;
+      padding: 14px 14px;
+      border-radius: 18px 0 0 18px;
+    }
+
+    #stage-counter-links {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 14px 0 14px 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      width: 100%;
+    }
+
+    #stage-counter:hover #stage-counter-links {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.3s ease 0.15s;
+    }
+
+    #stage-counter a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #fff8e7;
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      outline: none;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    #stage-counter a:focus {
+      outline: none;
+    }
+
+    #stage-counter a:hover {
+      opacity: 1;
+      transform: scale(1.1);
+      color: #ffefd6;
+      text-shadow: 0 0 6px rgba(255, 220, 150, 0.6);
+    }
+
+    /* надрезы как на батоне */
+    #stage-notch1,
+    #stage-notch2,
+    #stage-notch3,
+    #stage-notch4 {
+      position: absolute;
+      right: 0;
+      width: 12px;
+      height: 3px;
+      background: #a05a1a;
+      border-radius: 1px;
+      opacity: 0.6;
+    }
+
+    #stage-notch1 { top: 18%; }
+    #stage-notch2 { top: 38%; }
+    #stage-notch3 { top: 58%; }
+    #stage-notch4 { top: 78%; }
 
     /* ---------- подвал ---------- */
     #footer {
@@ -608,22 +723,22 @@
   <h2>🍞 Общая информация</h2>
   <div id="general-info-subtitle">Всё, что нужно знать о хлебе перед началом обучения</div>
   <div id="info-cards">
-    <a id="info-card1" href="https://ru.wikipedia.org/wiki/Хлеб#Состав" target="_blank">
+    <a id="info-card1" href="https://vk.com/away.php?to=https%3A%2F%2Fsportmail.ru%2Farticle%2Fothers%2F70806348%2F&utf=1" target="_blank">
       <span id="info-icon1">🌾</span>
       <h3>Состав</h3>
       <p>Мука, вода, дрожжи, соль. Иногда сахар, масло, солод.</p>
     </a>
-    <a id="info-card2" href="https://ru.wikipedia.org/wiki/Хлеб#Технология_приготовления" target="_blank">
+    <a id="info-card2" href="https://vk.com/away.php?to=https%3A%2F%2Fwww.iamcook.ru%2Fhowto%2Fshow%2Fhow-long-bake-bread-oven&utf=1" target="_blank">
       <span id="info-icon2">🕰️</span>
       <h3>Время</h3>
       <p>Полный цикл от замеса до готового хлеба занимает от 3 до 12 часов.</p>
     </a>
-    <a id="info-card3" href="https://ru.wikipedia.org/wiki/Хлеб#Выпечка" target="_blank">
+    <a id="info-card3" href="https://vk.com/away.php?to=https%3A%2F%2Fwww.iamcook.ru%2Fhowto%2Fshow%2Fhow-long-bake-bread-oven&utf=1" target="_blank">
       <span id="info-icon3">🌡️</span>
       <h3>Температура</h3>
       <p>От 25°C при замесе до 250°C в печи. Контроль обязателен.</p>
     </a>
-    <a id="info-card4" href="https://ru.wikipedia.org/wiki/Хлеб#Химический_состав" target="_blank">
+    <a id="info-card4" href="https://vk.com/away.php?to=https%3A%2F%2Fscienceforum.ru%2F2018%2Farticle%2F2018004535&utf=1" target="_blank">
       <span id="info-icon4">🧪</span>
       <h3>Химия</h3>
       <p>Брожение, клейковина, карамелизация — магия превращения теста в хлеб.</p>
@@ -635,6 +750,21 @@
 </div>
 
 <div id="stage1">
+
+  <div id="stage-counter">
+    <div id="stage-notch1"></div>
+    <div id="stage-notch2"></div>
+    <div id="stage-notch3"></div>
+    <div id="stage-notch4"></div>
+    <div id="stage-counter-links">
+      <a href="#stage1">Замес</a>
+      <a href="#stage2">Брожение</a>
+      <a href="#stage3">Формовка</a>
+      <a href="#stage4">Расстойка</a>
+      <a href="#stage5">Выпечка</a>
+    </div>
+  </div>
+
   <h2>Этап 1: Замес теста</h2>
   <div id="photo1"><img src="1.jpg" alt="Замес теста"></div>
   <p>Процесс начинается с соединения основного сырья: <span title="Пшеничная мука высшего сорта даёт лучшую клейковину">муки</span>, воды, дрожжей и соли. В тестомесильной машине компоненты интенсивно перемешиваются. Главная цель замеса — равномерно распределить все ингредиенты и развить <span title="Клейковина – белковый каркас, удерживающий пузырьки газа">клейковину</span>, которая будет удерживать пузырьки газа внутри теста, не давая ему опадать.</p>
